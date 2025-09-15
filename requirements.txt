@@ -1,0 +1,15 @@
+pandas
+numpy
+scikit-learn
+xgboost
+statsmodels
+sqlalchemy
+psycopg2-binary
+fastapi
+uvicorn
+joblib
+dash
+plotly
+apache-airflow==2.6.3    # production: use official install guide + constraints file
+tensorflow               # or torch (install only one for heavy use)
+scipy

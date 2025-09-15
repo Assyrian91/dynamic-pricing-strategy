@@ -1,0 +1,28 @@
+dynamic-pricing/
+├── README.md
+├── data/                      # raw / sample CSVs
+├── notebooks/
+│   ├── 01_EDA.ipynb
+│   └── 02_elasticity.ipynb
+├── src/
+│   ├── etl/
+│   │   └── ingest_to_postgres.py
+│   ├── features/
+│   │   └── feature_engineering.py
+│   ├── models/
+│   │   ├── train_model.py
+│   │   └── predict.py
+│   ├── api/
+│   │   ├── model_api.py        # FastAPI
+│   │   └── Dockerfile
+│   ├── dashboard/
+│   │   └── dash_app.py
+│   ├── airflow/
+│   │   └── dags/dynamic_pricing_dag.py
+│   └── utils/
+│       └── db.py
+├── docker-compose.yml
+├── k8s/
+│   ├── model-deployment.yaml
+│   └── dash-deployment.yaml
+└── requirements.txt
