@@ -47,7 +47,7 @@ dynamic-pricing-strategy/
 │
 ├── airflow/
 │   └── dags/
-│       └── dynamic_pricing_dag.py       # DAG لأتمتة ETL والنمذجة
+│       └── dynamic_pricing_dag.py      
 │
 ├── data/
 │   └── processed/
@@ -62,9 +62,9 @@ dynamic-pricing-strategy/
 │   ├── pie_chart_data.csv
 │   ├── scatter_chart_data.csv
 │   ├── top_products.csv
-│   ├── product_mapping.csv
-│   ├── test_data.csv
-│   └── train_data.csv
+│── product_mapping.csv
+│── test_data.csv
+│── train_data.csv
 │
 ├── models/
 │   ├── xgb_demand_model.joblib
