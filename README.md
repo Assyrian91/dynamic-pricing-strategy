@@ -43,16 +43,51 @@ The project includes:
 ⸻
 
 🔹 Project Structure
-dynamic_pricing/
-│── data/                     # Raw & processed datasets  
-│── models/                   # Saved ML models  
-│── src/  
-│   ├── models/               # Training scripts  
-│   ├── dashboard/            # Dash dashboard  
-│   ├── api/                  # FastAPI app  
-│   └── dynamic_pricing_recommendation.py  
-│── requirements.txt          # Dependencies  
-│── README.md                 # Project documentation
+dynamic-pricing-strategy/
+│
+├── airflow/
+│   └── dags/
+│       └── dynamic_pricing_dag.py       # DAG لأتمتة ETL والنمذجة
+│
+├── data/
+│   └── processed/
+│       ├── cleaned_retail.csv
+│       ├── daily_product_sales.csv
+│       ├── final_features.csv
+│
+├── recommendations/
+│   ├── bar_chart_data.csv
+│   ├── dot_chart_data.csv
+│   ├── line_chart_data.csv
+│   ├── pie_chart_data.csv
+│   ├── scatter_chart_data.csv
+│   ├── top_products.csv
+│   ├── product_mapping.csv
+│   ├── test_data.csv
+│   └── train_data.csv
+│
+├── models/
+│   ├── xgb_demand_model.joblib
+│   ├── price_optimizer.py
+│   ├── train_model.py
+│   ├── data_preprocessing.py
+│   ├── dynamic_pricing_model.py
+│   └── dynamic_pricing_recommendation.py
+│
+├── src/
+│   ├── api/
+│   │   └── app.py                      
+│   ├── dashboard/
+│   │   └── dashboard_app_v.py           
+│   ├── etl/
+│   │   └── load_online_retail_to_postgres.py
+│   ├── feature_engineering.py
+│   ├── price_elasticity.py
+│   └── top_product_analysis.py
+│
+├── .gitignore
+├── README.md
+└── requirements.txt
 
 🔹 How to Run
 
