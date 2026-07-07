@@ -1,3 +1,129 @@
+# 📊 Dynamic Pricing Strategy — End-to-End Data Science Project
+
+> **XGBoost demand prediction + dynamic pricing engine + FastAPI deployment + Airflow orchestration**  
+> Built by **Khoshaba Odeesho** | [Assyrian AI](https://github.com/Assyrian91)
+
+---
+
+## 🎯 What This Project Does
+
+Most pricing systems are static — set a price and leave it. This project builds a **dynamic pricing engine** that continuously predicts product demand using machine learning and automatically adjusts recommended prices to maximise revenue while maintaining demand balance.
+
+Inspired by Uber's surge pricing model, applied to real e-commerce retail data.
+
+---
+
+## 📈 Key Results
+
+| Metric | Value |
+|---|---|
+| **Model** | XGBoost Regressor |
+| **R²** | **0.95** |
+| **RMSE** | 0.33 |
+| **MAE** | 0.13 |
+| **Deployment** | FastAPI REST endpoint |
+| **Orchestration** | Apache Airflow DAG |
+
+---
+
+## 🏗️ Architecture
+
+Raw Retail Data (PostgreSQL)
+│
+▼
+ETL Pipeline (load_online_retail_to_postgres.py)
+│
+▼
+Data Preprocessing + Feature Engineering
+
+Lag features: qty_lag_1, price_lag_1
+Rolling averages: qty_7d_ma, qty_30d_ma
+Date features: day_of_week, month, quarter
+│
+▼
+XGBoost Demand Prediction Model (R² = 0.95)
+│
+▼
+Dynamic Pricing Engine
+Predict demand per product
+Optimise price to maximise revenue
+│
+┌────┴────┐
+▼         ▼
+Dash         FastAPI
+Dashboard    /predict_price endpoint
+(live viz)   (real-time predictions)
+│
+▼
+Apache Airflow DAG
+(scheduled pipeline orchestration)
+
+---
+
+## 🛠️ Tech Stack
+
+| Layer | Tool |
+|---|---|
+| ML Model | XGBoost |
+| Feature Engineering | Python · Pandas · NumPy · Scikit-learn |
+| Dashboard | Plotly Dash |
+| API Deployment | FastAPI · Uvicorn |
+| Orchestration | Apache Airflow |
+| Database | PostgreSQL |
+| Model Serialisation | Joblib |
+
+
+---
+
+## 🛠️ Tech Stack
+
+| Layer | Tool |
+|---|---|
+| ML Model | XGBoost |
+| Feature Engineering | Python · Pandas · NumPy · Scikit-learn |
+| Dashboard | Plotly Dash |
+| API Deployment | FastAPI · Uvicorn |
+| Orchestration | Apache Airflow |
+| Database | PostgreSQL |
+| Model Serialisation | Joblib |
+
+---
+
+## 📁 Project Structure
+dynamic-pricing-strategy/
+│
+├── airflow/
+│   └── dags/
+│       └── dynamic_pricing_dag.py      ← Airflow orchestration
+│
+├── data/
+│   └── processed/
+│       ├── cleaned_retail.csv
+│       ├── daily_product_sales.csv
+│       └── final_features.csv
+│
+├── models/
+│   ├── xgb_demand_model.joblib         ← Trained model
+│   ├── train_model.py                  ← Model training script
+│   ├── data_preprocessing.py
+│   ├── dynamic_pricing_model.py
+│   ├── dynamic_pricing_recommendation.py
+│   └── price_optimizer.py
+│
+├── src/
+│   ├── api/
+│   │   └── app.py                      ← FastAPI endpoint
+│   ├── dashboard/
+│   │   └── dashboard_app_v.py          ← Dash dashboard
+│   ├── etl/
+│   │   └── load_online_retail_to_postgres.py
+│   ├── feature_engineering.py
+│   ├── price_elasticity.py
+│   └── top_product_analysis.py
+│
+├── .gitignore
+├── README.md
+└── requirements.txt
 ---
 
 ## 🚀 How to Run
