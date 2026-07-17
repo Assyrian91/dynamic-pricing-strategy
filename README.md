@@ -1,243 +1,263 @@
-# 📊 Dynamic Pricing Strategy — End-to-End Data Science Project
+# 🛡️ Credit Card Fraud Detection System
 
-![Python](https://img.shields.io/badge/Python-3.10%2B-3776AB?style=for-the-badge&logo=python&logoColor=white)
-![XGBoost](https://img.shields.io/badge/XGBoost-R²_0.95-EB5B25?style=for-the-badge)
-![FastAPI](https://img.shields.io/badge/FastAPI-009688?style=for-the-badge&logo=fastapi&logoColor=white)
-![Airflow](https://img.shields.io/badge/Apache_Airflow-017CEE?style=for-the-badge&logo=apacheairflow&logoColor=white)
-![PostgreSQL](https://img.shields.io/badge/PostgreSQL-336791?style=for-the-badge&logo=postgresql&logoColor=white)
+![Python](https://img.shields.io/badge/Python-3.10-blue)
+![FastAPI](https://img.shields.io/badge/FastAPI-0.103-green)
+![License](https://img.shields.io/badge/license-MIT-blue)
+![Docker](https://img.shields.io/badge/Docker-Ready-blue)
+![XGBoost](https://img.shields.io/badge/XGBoost-Champion_Model-EB5B25)
 
-> **XGBoost demand prediction + dynamic pricing engine + FastAPI deployment + Airflow orchestration**  
-> Built by **Khoshaba Odeesho** | [Assyrian AI](https://github.com/Assyrian91)
-
----
-
-## 🎯 What This Project Does
-
-Most pricing systems are static — set a price and leave it. This project builds a **dynamic pricing engine** that continuously predicts product demand using machine learning and automatically adjusts recommended prices to maximise revenue while maintaining demand balance.
-
-Inspired by Uber's surge pricing model, applied to real e-commerce retail data.
+A comprehensive end-to-end machine learning project for detecting fraudulent credit card transactions, featuring real-time prediction APIs, a model training pipeline, and a deployment-ready structure.
 
 ---
 
-## 📈 Key Results
+## ⚙️ Quick Setup
 
-| Metric | Value |
-|---|---|
-| **Model** | XGBoost Regressor |
-| **R²** | **0.95** |
-| **RMSE** | 0.33 |
-| **MAE** | 0.13 |
-| **Deployment** | FastAPI REST endpoint |
-| **Orchestration** | Apache Airflow DAG |
+> Dataset not included — see `DATA_SETUP.md` for instructions.
+
+1. Download data from Kaggle
+2. Install dependencies: `pip install -r requirements.txt`
+3. Train model: `python scripts/train_model.py`
 
 ---
 
-## 🏗️ Architecture
+## 📚 Table of Contents
 
-```
-Raw Retail Data (PostgreSQL)
-        │
-        ▼
-ETL Pipeline (load_online_retail_to_postgres.py)
-        │
-        ▼
-Data Preprocessing + Feature Engineering
-  Lag features: qty_lag_1, price_lag_1
-  Rolling averages: qty_7d_ma, qty_30d_ma
-  Date features: day_of_week, month, quarter
-        │
-        ▼
-XGBoost Demand Prediction Model (R² = 0.95)
-        │
-        ▼
-Dynamic Pricing Engine
-  Predict demand per product
-  Optimise price to maximise revenue
-        │
-   ┌────┴────┐
-   ▼         ▼
- Dash      FastAPI
-Dashboard  /predict_price endpoint
-(live viz) (real-time predictions)
-        │
-        ▼
-Apache Airflow DAG
-(scheduled pipeline orchestration)
-```
+- [Features](#-features)
+- [Project Structure](#-project-structure)
+- [Installation](#-installation)
+- [Data Setup](#-data-setup)
+- [Usage](#-usage)
+- [Model Performance](#-model-performance)
+- [API Documentation](#-api-documentation)
+- [Testing](#-testing)
+- [Docker Deployment](#-docker-deployment)
+- [Configuration](#-configuration)
+- [Contributing](#-contributing)
+- [Roadmap](#️-roadmap)
 
 ---
 
-## 🛠️ Tech Stack
+## ✨ Features
 
-| Layer | Tool |
-|---|---|
-| ML Model | XGBoost |
-| Feature Engineering | Python · Pandas · NumPy · Scikit-learn |
-| Dashboard | Plotly Dash |
-| API Deployment | FastAPI · Uvicorn |
-| Orchestration | Apache Airflow |
-| Database | PostgreSQL |
-| Model Serialisation | Joblib |
+- ✅ Multiple ML Models (Logistic Regression, Random Forest, XGBoost, LightGBM)
+- ✅ Advanced Preprocessing (SMOTE, StandardScaler, Feature Engineering)
+- ✅ REST API using FastAPI
+- ✅ Interactive Dashboard (Dash)
+- ✅ Model Monitoring and Logging (Loguru)
+- ✅ Docker-ready
+- ✅ CI/CD Workflows (GitHub Actions)
 
 ---
 
 ## 📁 Project Structure
 
 ```
-dynamic-pricing-strategy/
-│
-├── airflow/
-│   └── dags/
-│       └── dynamic_pricing_dag.py      ← Airflow orchestration
+fraud_detection/
+├── src/
+│   ├── api/                # FastAPI application
+│   ├── data/               # Data preprocessing
+│   ├── features/           # Feature engineering
+│   ├── models/             # Training and prediction modules
+│   └── utils/              # Helper functions
 │
 ├── data/
-│   └── processed/
-│       ├── cleaned_retail.csv
-│       ├── daily_product_sales.csv
-│       └── final_features.csv
+│   ├── raw/                # Original dataset
+│   └── processed/          # Cleaned/preprocessed data
 │
-├── models/
-│   ├── xgb_demand_model.joblib         ← Trained model
-│   ├── train_model.py                  ← Model training script
-│   ├── data_preprocessing.py
-│   ├── dynamic_pricing_model.py
-│   ├── dynamic_pricing_recommendation.py
-│   └── price_optimizer.py
+├── models/saved_models/    # Trained models
+├── notebooks/              # Exploratory notebooks
+├── scripts/                # Training and evaluation scripts
+├── tests/                  # Unit and integration tests
+├── reports/                # Figures and metrics
+├── logs/                   # Application logs
 │
-├── src/
-│   ├── api/
-│   │   └── app.py                      ← FastAPI endpoint
-│   ├── dashboard/
-│   │   └── dashboard_app_v.py          ← Dash dashboard
-│   ├── etl/
-│   │   └── load_online_retail_to_postgres.py
-│   ├── feature_engineering.py
-│   ├── price_elasticity.py
-│   └── top_product_analysis.py
-│
-├── .gitignore
-├── README.md
-└── requirements.txt
+├── .github/workflows/      # CI/CD pipelines
+├── requirements.txt
+├── Dockerfile
+├── docker-compose.yml
+├── setup.py
+├── .env.example
+└── README.md
 ```
 
 ---
 
-## 🚀 How to Run
+## 🚀 Installation
 
-### 1. Clone the repository
+**Prerequisites:** Python 3.8+, pip, Git, (Optional) Docker
 
+### Clone the repository
 ```bash
-git clone https://github.com/Assyrian91/dynamic-pricing-strategy.git
-cd dynamic-pricing-strategy
+git clone https://github.com/Assyrian91/fraud-detection-project.git
+cd fraud-detection-project
 ```
 
-### 2. Create virtual environment
-
+### Create virtual environment
 ```bash
-# Windows
-python -m venv .venv
-.venv\Scripts\activate
+python -m venv venv
+venv\Scripts\activate    # On Windows
+```
 
-# macOS / Linux
-python -m venv .venv
-source .venv/bin/activate
-
+### Install dependencies
+```bash
 pip install -r requirements.txt
 ```
 
-### 3. Train the model
-
+### Configure environment
 ```bash
-python models/train_model.py
+copy .env.example .env
 ```
-
-### 4. Generate pricing recommendations
-
-```bash
-python models/dynamic_pricing_recommendation.py
-```
-
-### 5. Run the Dash dashboard
-
-```bash
-python src/dashboard/dashboard_app_v.py
-```
-
-Open: `http://127.0.0.1:8050`
-
-### 6. Run the FastAPI endpoint
-
-```bash
-uvicorn src.api.app:app --reload
-```
-
-Swagger docs: `http://127.0.0.1:8000/docs`
-
-**Example API call:**
-
-```bash
-curl -X POST "http://127.0.0.1:8000/predict_price" \
-  -H "Content-Type: application/json" \
-  -d '{"stock_code": "85123A", "qty_lag_1": 6, "price_lag_1": 2.55, "day_of_week": 1, "month": 12}'
-```
-
-**Response:**
-```json
-{
-  "predicted_demand": 8.3,
-  "recommended_price": 2.89
-}
-```
-
-### 7. Run Airflow DAG
-
-```bash
-airflow standalone
-```
-
-Then navigate to `http://localhost:8080` and trigger `dynamic_pricing_dag`.
 
 ---
 
-## 📊 Dashboard Visualisations
+## 📥 Data Setup
 
-| Chart | What It Shows |
+1. Download dataset from Kaggle — [Credit Card Fraud Detection](https://www.kaggle.com/mlg-ulb/creditcardfraud)
+2. Place `creditcard.csv` inside `data/raw/creditcard.csv`
+
+Or download via Kaggle API:
+```bash
+kaggle datasets download -d mlg-ulb/creditcardfraud
+unzip creditcardfraud.zip -d data/raw/
+```
+
+---
+
+## 📖 Usage
+
+### 1. Data Preprocessing
+```python
+from src.data.preprocessing import DataPreprocessor
+p = DataPreprocessor()
+df = p.load_data()
+X_train, X_test, y_train, y_test = p.preprocess_pipeline(df)
+```
+
+### 2. Model Training
+```python
+from src.models.train import ModelTrainer
+trainer = ModelTrainer()
+trainer.train_and_compare_models()
+trainer.save_model()
+```
+
+### 3. Run API
+```bash
+uvicorn src.api.app:app --reload --host 0.0.0.0 --port 8000
+```
+Swagger Docs → `http://localhost:8000/docs`
+
+---
+
+## 📊 Model Performance
+
+**Best Model: XGBoost**
+
+| Metric | Score |
 |---|---|
-| Line Chart | Daily revenue per product over time |
-| Scatter Plot | Price vs Predicted Demand — elasticity curve |
-| Donut Chart | Revenue share by product category |
-| Bar Chart | Top products by total revenue |
+| Accuracy | 99.95% |
+| Precision | 95.2% |
+| Recall | 89.7% |
+| F1 Score | 92.4% |
+| ROC AUC | 98.3% |
+
+**Confusion Matrix:**
+
+| | Predicted: 0 | Predicted: 1 |
+|---|---|---|
+| **Actual: 0** | 56,850 | 12 |
+| **Actual: 1** | 8 | 92 |
 
 ---
 
-## 💡 Key Insights
+## 📚 API Documentation
 
-- **R² of 0.95** confirms XGBoost captures 95% of demand variance from price and time signals
-- **Lag features** (previous day quantity and price) are the strongest demand predictors
-- **Rolling 7-day average** smooths noise and improves forecast stability
-- Products show **clear price elasticity** — small price increases cause measurable demand drops above threshold
-- **Seasonal patterns** in month and day-of-week features confirm weekend and holiday demand spikes
-
----
-
-## 🔮 Future Improvements
-
-- Real-time streaming via Kafka or Spark Streaming
-- Multi-store and multi-region pricing optimisation
-- Competitor pricing integration via web scraping
-- Deploy to AWS / Azure with Docker containerisation
-- A/B testing framework for pricing experiments
+| Method | Endpoint | Description |
+|---|---|---|
+| GET | `/` | Root endpoint |
+| GET | `/health` | Health check |
+| POST | `/predict` | Single transaction prediction |
+| POST | `/predict/batch` | Batch predictions |
+| POST | `/predict/explain` | Prediction with explanation |
+| GET | `/model/info` | Model details |
+| POST | `/model/threshold` | Update prediction threshold |
 
 ---
 
-## 👤 Author
+## 🧪 Testing
 
-**Khoshaba Odeesho**  
-Data Scientist & AI Automation Engineer  
-📍 Melbourne, Australia
-
-[GitHub](https://github.com/Assyrian91) · [LinkedIn](https://www.linkedin.com/in/khoshaba-odeesho-17b5b92aa/)
+```bash
+pytest
+pytest --cov=src --cov-report=html
+pytest tests/test_model.py::TestModelTrainer::test_train_single_model -v
+```
 
 ---
 
-*Part of a professional data science portfolio demonstrating end-to-end ML engineering — from raw data to deployed API.*
+## 🐳 Docker Deployment
+
+```bash
+# Build and run
+docker build -t fraud-detection .
+docker run -p 8000:8000 fraud-detection
+```
+
+Using Docker Compose:
+```bash
+docker-compose up --build -d
+```
+
+---
+
+## 🔧 Configuration
+
+`.env` file example:
+```
+API_HOST=0.0.0.0
+API_PORT=8000
+FRAUD_THRESHOLD=0.5
+LOG_LEVEL=INFO
+```
+
+---
+
+## 🤝 Contributing
+
+1. Fork the repository
+2. Create feature branch → `git checkout -b feature/your-feature`
+3. Commit changes → `git commit -m "Add new feature"`
+4. Push → `git push origin feature/your-feature`
+5. Open Pull Request
+
+**Code Style:** PEP 8 · Type hints · Docstrings · Tests for new features
+
+---
+
+## 📄 License
+
+Licensed under the MIT License — see `LICENSE`.
+
+---
+
+## 👨‍💻 Author
+
+**Khoshaba Odeesho** — Data Analyst & ML Developer
+
+- GitHub: [Assyrian91](https://github.com/Assyrian91)
+- LinkedIn: [khoshaba-odeesho](https://www.linkedin.com/in/khoshaba-odeesho-17b5b92aa/)
+
+---
+
+## 🗺️ Roadmap
+
+- [ ] Add SHAP/LIME explainability
+- [ ] Real-time streaming predictions
+- [ ] A/B testing framework
+- [ ] Mobile app interface
+- [ ] Email/SMS fraud alerts
+- [ ] Model versioning system
+- [ ] Monitoring dashboard
+
+---
+
+⭐ Star this repository if you find it helpful!
