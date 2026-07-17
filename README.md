@@ -1,5 +1,11 @@
 # 📊 Dynamic Pricing Strategy — End-to-End Data Science Project
 
+![Python](https://img.shields.io/badge/Python-3.10%2B-3776AB?style=for-the-badge&logo=python&logoColor=white)
+![XGBoost](https://img.shields.io/badge/XGBoost-R²_0.95-EB5B25?style=for-the-badge)
+![FastAPI](https://img.shields.io/badge/FastAPI-009688?style=for-the-badge&logo=fastapi&logoColor=white)
+![Airflow](https://img.shields.io/badge/Apache_Airflow-017CEE?style=for-the-badge&logo=apacheairflow&logoColor=white)
+![PostgreSQL](https://img.shields.io/badge/PostgreSQL-336791?style=for-the-badge&logo=postgresql&logoColor=white)
+
 > **XGBoost demand prediction + dynamic pricing engine + FastAPI deployment + Airflow orchestration**  
 > Built by **Khoshaba Odeesho** | [Assyrian AI](https://github.com/Assyrian91)
 
@@ -28,50 +34,36 @@ Inspired by Uber's surge pricing model, applied to real e-commerce retail data.
 
 ## 🏗️ Architecture
 
+```
 Raw Retail Data (PostgreSQL)
-│
-▼
+        │
+        ▼
 ETL Pipeline (load_online_retail_to_postgres.py)
-│
-▼
+        │
+        ▼
 Data Preprocessing + Feature Engineering
-
-Lag features: qty_lag_1, price_lag_1
-Rolling averages: qty_7d_ma, qty_30d_ma
-Date features: day_of_week, month, quarter
-│
-▼
+  Lag features: qty_lag_1, price_lag_1
+  Rolling averages: qty_7d_ma, qty_30d_ma
+  Date features: day_of_week, month, quarter
+        │
+        ▼
 XGBoost Demand Prediction Model (R² = 0.95)
-│
-▼
+        │
+        ▼
 Dynamic Pricing Engine
-Predict demand per product
-Optimise price to maximise revenue
-│
-┌────┴────┐
-▼         ▼
-Dash         FastAPI
-Dashboard    /predict_price endpoint
-(live viz)   (real-time predictions)
-│
-▼
+  Predict demand per product
+  Optimise price to maximise revenue
+        │
+   ┌────┴────┐
+   ▼         ▼
+ Dash      FastAPI
+Dashboard  /predict_price endpoint
+(live viz) (real-time predictions)
+        │
+        ▼
 Apache Airflow DAG
 (scheduled pipeline orchestration)
-
----
-
-## 🛠️ Tech Stack
-
-| Layer | Tool |
-|---|---|
-| ML Model | XGBoost |
-| Feature Engineering | Python · Pandas · NumPy · Scikit-learn |
-| Dashboard | Plotly Dash |
-| API Deployment | FastAPI · Uvicorn |
-| Orchestration | Apache Airflow |
-| Database | PostgreSQL |
-| Model Serialisation | Joblib |
-
+```
 
 ---
 
@@ -90,6 +82,8 @@ Apache Airflow DAG
 ---
 
 ## 📁 Project Structure
+
+```
 dynamic-pricing-strategy/
 │
 ├── airflow/
@@ -124,6 +118,8 @@ dynamic-pricing-strategy/
 ├── .gitignore
 ├── README.md
 └── requirements.txt
+```
+
 ---
 
 ## 🚀 How to Run
